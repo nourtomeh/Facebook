@@ -1,7 +1,11 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html class="fixed">
 	<head>
-		<title>انشاء حساب جديد</title>
+		<title>تسجيل الدخول</title>
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
@@ -9,9 +13,6 @@
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
 		<meta name="author" content="okler.net">
 
-
-		<!-- Web Fonts  -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 		<!-- Vendor CSS -->
 		<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
@@ -28,8 +29,6 @@
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
 
-		<!-- Head Libs -->
-		<script src="assets/vendor/modernizr/modernizr.js"></script>
 
 	</head>
 	<body>
@@ -37,49 +36,71 @@
 		<section class="body-sign">
 			<div class="center-sign">
 
+
 				<div class="panel panel-sign">
 					<div class="panel-title-sign mt-xl text-right">
-						<h2 class="title text-uppercase text-bold m-none"> انشاء حساب جديد&nbsp;&nbsp;<i class="fa fa-user mr-xs"></i></h2>
+						<h2 class="title text-uppercase text-bold m-none"> تسجيل دخول&nbsp;&nbsp;<i class="fa fa-user mr-xs"></i></h2>
 					</div>
 					<div class="panel-body">
-						<form>
+						<form action="database/login.php" method="post">
 							<div class="form-group mb-lg">
-								<label class="pull-right">الاسم</label>
-								<input  name="name" type="text" class="form-control input-lg text-right" placeholder="ادخل الاسم"/>
-							</div>
-
-							<div class="form-group mb-lg">
-								<label class="pull-right">عنوان البريد الالكتروني</label>
-								<input name="email" type="email" class="form-control input-lg" placeholder="example@company.com"/>
-							</div>
-
-							<div class="form-group mb-none">
-								<div class="row">
-									<div class="col-sm-6 mb-lg">
-										<label class="pull-right">اعادة الرقم السري</label>
-										<input name="pwd" type="password" class="form-control input-lg" />
-									</div>
-									<div class="col-sm-6 mb-lg">
-										<label class="pull-right">الرقم السري</label>
-										<input name="pwd_confirm" type="password" class="form-control input-lg" />
-									</div>
+								<label class="pull-right">اسم المستخدم</label>
+								<div class="input-group input-group-icon">
+									<input name="username" type="text" class="form-control input-lg" placeholder="Username" required/>
+									<span class="input-group-addon">
+										<span class="icon icon-lg">
+											<i class="fa fa-user"></i>
+										</span>
+									</span>
 								</div>
 							</div>
+
+							<div class="form-group mb-lg">
+								<div class="clearfix">
+									<label class="pull-right">كلمة المرور</label>
+
+								</div>
+								<div class="input-group input-group-icon">
+									<input name="pwd" type="password" class="form-control input-lg" placeholder="**********" required/>
+									<span class="input-group-addon">
+										<span class="icon icon-lg">
+											<i class="fa fa-lock"></i>
+										</span>
+									</span>
+								</div>
+							</div>
+
+                            <p class="text-right" style="color: red">
+                            <?php
+                            if( isset($_SESSION['Error']) )
+                            {
+                                echo $_SESSION['Error'];
+
+                                unset($_SESSION['Error']);
+
+                            }
+                            ?>
+                            </p>
+
 
 							<div class="row">
-
 								<div class="col-sm-4 text-left">
-									<button type="submit" class="btn btn-primary hidden-xs">تسجيل الحساب</button>
+									<button type="submit" class="btn btn-primary hidden-xs">تسجيل دخول</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
 								</div>
 							</div>
 
+							<span class="mt-lg mb-lg line-thru text-center text-uppercase">
+								<span>or</span>
+							</span>
 
 
-							<p class="text-center">لديك حساب ؟ <a href="sign_in.html">تسجيل الدخول</a>
+							<p class="text-right"> اليس لديك حساب ؟ <a href="sign_up.php">انشاء حساب جديد</a></p>
 
 						</form>
 					</div>
 				</div>
+
 			</div>
 		</section>
 		<!-- end: page -->

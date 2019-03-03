@@ -1,3 +1,10 @@
+<?php
+ session_start();
+
+ if (!isset($_SESSION['user_email'])) {
+     header('Location:sign_in.php');
+ }
+ ?>
 <!DOCTYPE html>
 <html>
 <title>الصفحة الرئيسية</title>
@@ -11,7 +18,6 @@
     html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 </style>
 <body class="w3-theme-l5">
-
 <!-- Navbar -->
 <div class="w3-top">
     <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
@@ -21,8 +27,8 @@
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
 
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-            <img src="assets/uploaded/pesonal_profile.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+        <a  onclick="document.location.href = 'helper/kill_session.php';" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+            Logout  <img src="assets/uploaded/pesonal_profile.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
         </a>
     </div>
 </div>
@@ -45,6 +51,7 @@
             <div class="w3-card w3-round w3-white">
                 <div class="w3-container">
                     <h4 class="w3-center">My Profile</h4>
+
                     <p class="w3-center"><img src="assets/uploaded/pesonal_profile.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
                     <hr>
                     <p dir="rtl"><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> هندسة حاسوب</p>
