@@ -1,8 +1,8 @@
 <?php
-
+session_start();
 $servername = "localhost";
 $username = "university_service";
-$password = "";
+$password = "root";
 
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);
@@ -29,7 +29,8 @@ if($result) {
     header('Location: ../home.php');
 }
 else {
-    echo "Failed to register";
+    $_SESSION['Error'] = "حدث خطأ في تسجيل الحساب , يرجى التأكد من أن الايميل ليس مسجل مسبقا";
+    header('Location: ../sign_up.php');
 }
 
 ?>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html class="fixed">
 	<head>
@@ -75,7 +78,17 @@
 									</div>
 								</div>
 							</div>
+                            <p class="text-right" style="color: red">
+                                <?php
+                                if( isset($_SESSION['Error']) )
+                                {
+                                    echo $_SESSION['Error'];
 
+                                    unset($_SESSION['Error']);
+
+                                }
+                                ?>
+                            </p>
 							<div class="row">
 
 								<div class="col-sm-4 text-left">
