@@ -2,7 +2,7 @@
 session_start();
 $servername = "localhost";
 $username = "university_service";
-$password = "root";
+$password = "";
 
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);
@@ -24,8 +24,10 @@ $query = "INSERT INTO user(`name`, `email`, `password`, `age`) VALUES('$name', '
 $result = mysqli_query($conn,$query);
 if($result) {
     session_start();
+    $user_id = mysqli_insert_id($conn);
+    $_SESSION['user_id'] = $user_id;
     $_SESSION['user_email'] = $email;
-    echo "Succesfully registered";
+    echo "Successfully registered";
     header('Location: ../home.php');
 }
 else {

@@ -9,41 +9,35 @@ $username = "university_service";
 $password = "";
 
 // Create connection
-//$conn = mysqli_connect($servername, $username, $password);
-$conn = mysqli_connect($servername, "root",$password, $username,"3306");
+$conn = mysqli_connect($servername, "root", $password, $username, "3306");
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 mysqli_set_charset($conn,"utf8");
-$user_email = $_SESSION['user_email'];
 
-$query = "select id from  `user` where email = '".$user_email."'";
+$user_email = $_SESSION['user_email'];
+$query = "SELECT id FROM `user` WHERE email = '".$user_email."'";
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $user_id = $row["id"];
-}
-else {
-    echo "no user";
+} else {
     header('Location: ../sign_in.php');
 }
 
-
-$to = $_REQUEST['to_id'];
-$txt = $_REQUEST['txt'];
-$from = $user_id;
+$txt = $_POST['post_txt'];
 $date = date('Y-m-d H:i:s');
+$group_id = $_POST['group_id'];
 
-
-$query2 = "INSERT INTO messages(`created_at`, `from_id`, `to_id`, `txt`) VALUES('$date', '$user_id', '$to', '$txt')";
-
+$query2 = "INSERT INTO post(`txt`, `created_at`, `user_id`, `group_id`) VALUES('$txt', '$date', '$user_id', '$group_id')";
 $result2 = mysqli_query($conn,$query2);
 
 if($result2) {
-    echo "done";
+    $_SESSION['post_added'] = "تم اضافة البوست بنجاح";
+    header('Location: ../groups_profile.php?id=' . $group_id);
+} else {
+    echo "Failed to add post";
 }
-else {
-    echo "Failed to register";
-}
+?>

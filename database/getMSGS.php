@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_email'])) {
 
 $servername = "localhost";
 $username = "university_service";
-$password = "root";
+$password = "";
 
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);
@@ -33,7 +33,17 @@ else {
 
 $to = $_REQUEST['to_id'];
 
-$query2 = "select * from (SELECT * from `messages` where (from_id = '" . $user_id . "' and to_id = '" . $to . "') or (from_id= '" . $to . "' and to_id= '" . $user_id . "' ) ORDER BY id ) tmp inner join user on tmp.from_id = user.id;";
+$query2 = "SELECT * 
+FROM (
+    SELECT * 
+    FROM `messages` 
+    WHERE (from_id = '$user_id' AND to_id = '$to') 
+       OR (from_id = '$to' AND to_id = '$user_id') 
+    ORDER BY id ASC
+) tmp 
+INNER JOIN user 
+    ON tmp.from_id = user.id
+";
 
 $result2 = mysqli_query($conn,$query2);
 

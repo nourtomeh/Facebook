@@ -19,130 +19,44 @@ if (!isset($_SESSION['user_email'])) {
     html, body, h1, h2, h3, h4, h5 {
         font-family: "Open Sans", sans-serif
     }
-
-
-    .create-group-sm {
-        display: none;
-    }
-
-    .groups {
-        overflow-y: auto;
-    }
-
-    @media only screen and (max-width: 900px ) {
-        .create-group-sm {
-            display: block;
-            margin: 10px 0 10px 0;
-        }
-
-        .create-group-md {
-            display: none;
-        }
-
-        .search-group {
-            width: 100%;
-        }
-
-    }
-
 </style>
 <body class="w3-theme-l5">
 
 <?php include 'navbar.php' ?>
-
-<!-- Page Container -->
-
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
 
 
     <!-- The Grid -->
     <div class="w3-row">
         <!-- Left Column -->
-        <div class="w3-col m3 pull-right">
+        <div class="w3-col m3 pull-right mt-4">
             <!-- Profile -->
             <div class="w3-card w3-round w3-white">
+
                 <div class="w3-container">
-                    <a style="color: black" href="user_profile.php?user_id=<?php echo getdata("id"); ?>">
-                        <!-- Modify this line -->
-                        <h4 class="w3-center"><?php echo getdata("name"); ?></h4>
-                        <p class="w3-center"><img src="<?php echo getdata("img"); ?>" class="w3-circle"
-                                                  style="height:106px;width:106px" alt="Avatar"></p>
-                    </a>
+                    <h4 class="w3-center"><?php echo getdata("name") ?></h4>
+
+                    <p class="w3-center"><img src="<?php echo getdata("img") ?>" class="w3-circle"
+                                              style="height:106px;width:106px" alt="Avatar"></p>
                     <hr>
                     <p dir="rtl"><i
-                                class="fa fa-institution fa-fw w3-margin-right w3-text-theme"></i><?php echo getdata("university"); ?>
+                                class="fa fa-institution fa-fw w3-margin-right w3-text-theme"></i><?php echo getdata("university") ?>
                     </p>
                     <p dir="rtl"><i
-                                class="fa fa-graduation-cap fa-fw w3-margin-right w3-text-theme"></i><?php echo getdata("major"); ?>
+                                class="fa fa-graduation-cap fa-fw w3-margin-right w3-text-theme"></i><?php echo getdata("major") ?>
                     </p>
                     <p dir="rtl"><i
-                                class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <?php echo getdata("age"); ?>
+                                class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <?php echo getdata("age") ?>
                     </p>
+                    <?php if (isFriend()): ?>
+                        <button class="btn btn-secondary pull-right mb-3 remove-friend-btn"
+                                data-user-id="<?php echo getData("id") ?>"> إلغاء الصداقة
+                        </button>
+                    <?php endif; ?>
+
                 </div>
             </div>
-
             <br>
-
-            <div class="w3-card w3-round w3-white">
-                <div class="w3-container">
-                    <span><h3 class="text-center">المجموعات</h3></span>
-                    <div class="row">
-                        <div class="col-12 col-md-2 text-center create-group-md">
-                            <span>
-                    <button class="btn btn-success add-group" id="createGroupBtn" data-toggle="modal"
-                            data-target="#group-modal">+</button>
-                            </span>
-                        </div>
-                        <div class="col-12 col-md-10 search-group">
-                <span class="search-form d-flex align-items-center justify-content-end" style="margin-right: 5px">
-                    <input type="text" class="form-control" id="group-search-input">
-                    <button class="search-btn"><label for="group-search-input" class="fa fa-search"></label></button>
-                </span>
-                        </div>
-
-                    </div>
-                    <div class="col-12  text-center create-group-sm">
-                <span class="col-12  mx-4">
-                    <button class="btn btn-success col-md-10 col-12 add-group" data-toggle="modal"
-                            data-target="#group-modal">إنشاء مجموعة</button>
-                </span>
-                    </div>
-                </div>
-                <div class="groups" style="height: 45vh" dir="rtl" >
-
-                </div>
-
-
-            </div>
-
-
-            <br>
-
-
-            <div class="modal" id="group-modal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header ">
-                            <!--                <h4 class="modal-title">انشاء مجموعة</h4>-->
-                            <button type="button" class="close pull-left" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <div class="modal-body">
-                            <form method="post" action="database/addNewGroup.php">
-                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"">
-                                <div class="form-group" dir="rtl">
-                                    <label for="group_name">اسم المجموعة</label>
-                                    <input type="text" class="form-control" id="group_name" name="group_name" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary" id="create-group-btn">انشاء</button>
-                            </form>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
 
 
             <!-- End Left Column -->
@@ -151,37 +65,6 @@ if (!isset($_SESSION['user_email'])) {
         <!-- Middle Column -->
         <div class="w3-col m7 pull-right">
 
-            <form name="postForm" action="database/addpost.php" method="post" accept-charset="utf-8">
-                <div class="w3-row-padding">
-                    <div class="w3-col m12">
-                        <div class="w3-card w3-round w3-white">
-                            <div class="w3-container w3-padding">
-                                <h6 class="w3-opacity" style="text-align: right">
-                                    اعلان جديد ...
-                                </h6>
-                                <textarea contenteditable="true" class="form-control w3-border w3-padding" rows="5"
-                                          style="text-align: right" id="post_txt" name="post_txt"
-                                          required></textarea><br>
-                                <p class="text-right pull-right" style="color: green;font-size: 20px;">
-                                    <?php
-                                    if (isset($_SESSION['post_added'])) {
-                                        echo $_SESSION['post_added'];
-
-                                        unset($_SESSION['post_added']);
-
-                                    }
-                                    ?>
-                                </p>
-                                <button type="submit" id="btn" class="w3-button w3-theme"><i
-                                            class="fa fa-pencil"></i>
-                                     نشر
-                                </button>
-                                <div id="temp"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
 
             <!-- Start Model -->
 
@@ -225,61 +108,60 @@ if (!isset($_SESSION['user_email'])) {
 
             <?php
             $post = getposts();
-            foreach ($post as $item) {
-                echo '<div class="w3-container w3-card w3-white w3-round w3-margin" data-post="' . $item["post_id"] . '"><br>';
-                echo '<a href="user_profile.php?user_id=' . $item["user_id"] . '">';
-                echo '<img src="' . $item["img"] . '" alt="Avatar" class="w3-right w3-circle w3-margin-right" style="width:50px">';
-                echo '<h4 style="color: black" class="w3-right mx-3">' . $item["name"] . '</h4>';
-                echo '</a>';
-                if ($item["user_id"] == $_SESSION['user_id']) {
-                    echo '<span class="glyphicon glyphicon-remove delete-post pull-left" data-id="' . $item['post_id'] . '">&nbsp;</span>';
-                }
-                echo '<span class="w3-left w3-opacity">' . $item["created_at"] . '</span>';
-                echo '<br>';
-                echo '<br>';
-                if (!empty($item["group_name"])) {
-                    echo '<p style="color: grey; text-align: right">' . $item["group_name"] . '</p>';
-                }
-                echo '<br> ';
-                echo '<p  dir="rtl">' . $item["txt"] . '</p>';
-
-
-                echo '<div class="w3-row-padding">';
-                echo '<div class=" col-12 col-md-9 pull-right">';
-                echo '<div class="w3-card w3-round w3-white">';
-                echo '<div class="w3-container w3-padding">';
-                echo ' <textarea placeholder="أكتب تعليقاً..." contenteditable="true" class="form-control w3-border w3-padding comment-text" rows="1" style="text-align: right" name="comment_text" required></textarea>';
-                echo '</div>';
-                echo '</div>';
-                echo '</div>';
-                echo '<div class=" col-12 col-md-3 pull-left">';
-                echo '<button style="margin-top: 7px;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom comment" ><i class="fa fa-comment"></i>  تعليق</button>';
-                echo '</div>';
-                echo '</div>';
-                echo '<hr>';
-                $comment = getComments();
-                foreach ($comment as $item2) {
-                    if ($item2["post_id"] == $item["post_id"]) {
-                        echo '<div class="col-sm-12 cmnt">';
-                        echo '<div class="panel panel-default">';
-                        echo '<div class="panel-heading text-right">';
-                        if ($item2["user_id"] == $_SESSION['user_id']) {
-                            echo '<span class="glyphicon glyphicon-remove delete-comment pull-left" data-id="' . $item2['comment_id'] . '">&nbsp;</span>';
-                            echo '<span class="glyphicon glyphicon-edit edit-comment pull-left" data-id="' . $item2['comment_id'] . '" data-content="' . $item2['txt'] . '" data-toggle="modal" data-target="#myModal_comment"> &nbsp;</span>';
-                        }
-                        echo '<span class="text-muted pull-left"> ' . $item2["created_at"] . '  </span>';
-                        echo '<a href="user_profile.php?user_id=' . $item2["user_id"] . '"><strong>' . $item2['name'] . ' </strong>';
-                        echo '<img src="' . $item2['img'] . '" width="25" height="25" style="border-radius: 50%;"></a>';
-                        echo '</div>';
-                        echo '<div class="panel-body text-right">';
-                        echo $item2['txt'];
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
+            if (!empty($post)) {
+                foreach ($post as $item) {
+                    echo '<div class="w3-container w3-card w3-white w3-round w3-margin" data-post="' . $item["post_id"] . '"><br>';
+                    echo '<a  href="user_profile.php?user_id=' . $item["user_id"] . '">';
+                    echo '<img src="' . $item["img"] . '" alt="Avatar" class="w3-right w3-circle w3-margin-right" style="width:50px">';
+                    echo '<h4 style="color: black" class="w3-right mx-3">' . $item["name"] . '</h4>';
+                    echo '</a>';
+                    if ($item["user_id"] == $_SESSION['user_id']) {
+                        echo '<span class="glyphicon glyphicon-remove delete-post pull-left" data-id="' . $item['post_id'] . '">&nbsp;</span>';
                     }
-                }
+                    echo '<span class="w3-left w3-opacity">' . $item["created_at"] . '</span>';
+                    echo '<hr class="w3-clear">';
+                    echo '<p dir="rtl">' . $item["txt"] . '</p> <br>';
 
-                echo '</div>';
+                    echo '<div class="w3-row-padding">';
+                    echo '<div class="col-12 col-md-9 pull-right">';
+                    echo '<div class="w3-card w3-round w3-white">';
+                    echo '<div class="w3-container w3-padding">';
+                    echo ' <textarea placeholder="أكتب تعليقاً..." contenteditable="true" class="form-control w3-border w3-padding comment-text" rows="1" style="text-align: right" name="comment_text" required></textarea>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="col-12 col-md-3 pull-right">';
+                    echo '<button style="margin-top: 7px;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom comment" ><i class="fa fa-comment"></i>  نعليق</button>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<hr>';
+                    $comment = getComments();
+                    foreach ($comment as $item2) {
+                        if ($item2["post_id"] == $item["post_id"]) {
+                            echo '<div class="col-sm-12 cmnt">';
+                            echo '<div class="panel panel-default">';
+                            echo '<div class="panel-heading text-right">';
+                            if ($item2["user_id"] == $_SESSION['user_id']) {
+                                echo '<span class="glyphicon glyphicon-remove delete-comment pull-left" data-id="' . $item2['comment_id'] . '">&nbsp;</span>';
+                                echo '<span class="glyphicon glyphicon-edit edit-comment pull-left" data-id="' . $item2['comment_id'] . '" data-content="' . $item2['txt'] . '" data-toggle="modal" data-target="#myModal_comment"> &nbsp;</span>';
+                            }
+                            echo '<span class="text-muted pull-left"> ' . $item2["created_at"] . '  </span>';
+                            echo '<a href="user_profile.php?user_id=' . $item2["user_id"] . '"><strong>' . $item2['name'] . ' </strong>';
+                            echo '<img src="' . $item2['img'] . '" width="25" height="25" style="border-radius: 50%;"></a>';
+                            echo '</div>';
+                            echo '<div class="panel-body text-right">';
+                            echo $item2['txt'];
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+
+                        }
+                    }
+
+                    echo '</div>';
+                }
+            } else {
+                echo '<div class="w3-container d-flex justify-content-center align-items-center w3-margin h1">لا يوجد منشورات</div>';
             }
 
 
@@ -296,7 +178,6 @@ if (!isset($_SESSION['user_email'])) {
     <!-- End Page Container -->
 </div>
 <br>
-
 <!-- Footer -->
 <footer class="w3-container w3-theme-d3 w3-padding-16">
     <h5 style="text-align: center">Footer</h5>
@@ -308,40 +189,32 @@ if (!isset($_SESSION['user_email'])) {
 <script>
     $(document).ready(function () {
 
-        function getGroups() {
+        $('.remove-friend-btn').on('click', function () {
+            let button = $(this);
+            let userId = $(this).data('user-id');
+            console.log(userId);
+
+
             $.ajax({
-                url: "database/get_groups.php",
-                type: 'GET',
-                success: function (response) {
-                    $('.groups').empty();
-                    $('.groups').append(response);
+                url: "database/friend_request.php",
+                type: "POST",
+                data: {
+                    userId: userId,
+                    status: "remove"
+                },
+                success: function (data) {
+                    console.log(data);
+                    button.text('تم الغاء الصداقة');
+                    button.attr("disabled", true);
+
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
                 }
             });
-        }
 
-        getGroups();
 
-        $('#group-search-input').on('input', function () {
-            var nameOfGroup = $(this).val();
-            if (nameOfGroup !== '') {
-                $.ajax({
-                    url: "database/search-groups.php",
-                    type: 'GET',
-                    data: {nameOfGroup: nameOfGroup},
-                    success: function (response) {
-                        $('.groups').empty();
-                        $('.groups').append(response);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus, errorThrown);
-                    }
-                });
-            } else {
-                getGroups();
-            }
         });
 
 
@@ -381,20 +254,17 @@ if (!isset($_SESSION['user_email'])) {
             var text_content = ele.getElementsByClassName('comment-text')[0];
             var post_id = ele.getAttribute("data-post");
 
-
             if (text_content.value == "") {
                 alert("يجب إدخال نص للتعليق!");
                 return false;
             } else {
-                console.log(text_content.value)
-                console.log(post_id)
                 $.ajax({
                     url: "database/addComment.php",
                     type: "get",
                     data: {"txt": text_content.value, "post_id": post_id},
                     success: function (data) {
-                        data = JSON.parse(data)
-                        console.log(data)
+
+                        data = JSON.parse(data);
                         $(btn).closest('.w3-container.w3-card.w3-white.w3-round.w3-margin')
                             .append('<hr>\n' +
                                 '                <div class="col-sm-12">\n' +
@@ -403,10 +273,8 @@ if (!isset($_SESSION['user_email'])) {
                                 '                            <span class="glyphicon glyphicon-remove delete-comment pull-left" data-id="">&nbsp;</span>\n' +
                                 '                            <span class="glyphicon glyphicon-edit edit-comment pull-left" data-id="" data-content=""> &nbsp;</span>\n' +
                                 '                            <span class="text-muted pull-left">Now</span>\n' +
-                                '\n' +
                                 '                            <strong>' + data.user_name + ' </strong>\n' +
                                 '                            <img src="' + data.user_img + '" width="25" height="25" style="border-radius: 50%;">\n' +
-                                '\n' +
                                 '                        </div>\n' +
                                 '                        <div class="panel-body text-right">\n' +
                                 '                            ' + text_content.value + '\n' +
@@ -419,13 +287,10 @@ if (!isset($_SESSION['user_email'])) {
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log(textStatus, errorThrown);
                     }
-
-
                 });
-
             }
-
         });
+
 
         $('.delete-comment').on("click", function (event) {
             var ele = event.target;
@@ -458,6 +323,7 @@ if (!isset($_SESSION['user_email'])) {
             $('.actionBtn').addClass('btn-success');
             $('.actionBtn').removeClass('btn-danger');
             $('.actionBtn').addClass('edit');
+
             $('.EditContent').show();
             $('#insName').val($(this).data('content'));
 
@@ -533,23 +399,21 @@ if (!isset($_SESSION['user_email'])) {
 
             });
         })
-    })
-    ;
+    });
 </script>
 
-<?php getposts() ?>
+
 </body>
-</html>
 
 <?php
 
 
-function getdata($input)
+function isFriend()
 {
     $servername = "localhost";
     $username = "university_service";
     $password = "";
-
+    $user_id = $_GET['user_id'];
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);
     $conn = mysqli_connect($servername, "root", $password, $username, "3306");
@@ -558,7 +422,35 @@ function getdata($input)
         die("Connection failed: " . mysqli_connect_error());
     }
     mysqli_set_charset($conn, "utf8");
-    $query = "select * from  `user` where email = '" . $_SESSION['user_email'] . "'";
+
+    $query = "select status from friendships where (user1_id = '$user_id' and user2_id = '$_SESSION[user_id]') or (user1_id = '$_SESSION[user_id]' and user2_id = '$user_id') ";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if ($row['status'] == 'accepted')
+            return true;
+        else
+            return false;
+    } else {
+        return false;
+    }
+
+}
+function getdata($input)
+{
+    $servername = "localhost";
+    $username = "university_service";
+    $password = "";
+    $user_id = $_GET['user_id'];
+// Create connection
+//$conn = mysqli_connect($servername, $username, $password);
+    $conn = mysqli_connect($servername, "root", $password, $username, "3306");
+// Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    mysqli_set_charset($conn, "utf8");
+    $query = "select * from  `user` where id = '$user_id'";
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
@@ -582,7 +474,8 @@ function getdata($input)
         if ($input == "university")
             return $university;
     } else {
-        header('Location: ../sign_in.php');
+//        header('Location: ../sign_in.php');
+        header("Location: ../sign_in.php");
     }
     return "";
 }
@@ -604,15 +497,11 @@ function getposts()
     }
     mysqli_set_charset($conn, "utf8");
 
-    // Fetch posts from the user and their friends
-    $query = "SELECT post.id as post_id, post.txt, post.created_at, user.id as user_id, user.name, user.img , groups.name as group_name
-              FROM post 
-              INNER JOIN user ON post.user_id = user.id 
-              LEFT JOIN friendships ON (friendships.user1_id = post.user_id AND friendships.user2_id = $user_id AND friendships.status = 'accepted') 
-                                      OR (friendships.user2_id = post.user_id AND friendships.user1_id = $user_id AND friendships.status = 'accepted')
-             LEFT JOIN user_groups ON user_groups.user_id = $user_id AND user_groups.group_id = post.group_id AND user_groups.status IN ('admin', 'member')
-              LEFT JOIN groups ON groups.id = post.group_id
-              WHERE post.user_id = $user_id OR friendships.user1_id = $user_id OR friendships.user2_id = $user_id OR user_groups.user_id = $user_id
+    // Fetch posts only made by the current user
+    $query = "SELECT post.id as post_id, post.txt, post.created_at, user.id as user_id, user.name, user.img
+              FROM post
+              INNER JOIN user ON post.user_id = user.id
+              WHERE post.user_id = $user_id
               ORDER BY post.id DESC";
 
     $result = $conn->query($query);
@@ -626,8 +515,7 @@ function getposts()
                 "created_at" => $row["created_at"],
                 "user_id" => $row["user_id"],
                 "name" => $row["name"],
-                "img" => $row["img"],
-                "group_name" =>$row["group_name"]
+                "img" => $row["img"]
             ]);
         }
         return $posts;
@@ -643,26 +531,43 @@ function getComments()
     $username = "university_service";
     $password = "";
 
-// Create connection
-//$conn = mysqli_connect($servername, $username, $password);
+    // Get the user's ID
+    $user_id = getdata("id");
+
+    // Create connection
     $conn = mysqli_connect($servername, "root", $password, $username, "3306");
-// Check connection
+    // Check connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
     mysqli_set_charset($conn, "utf8");
-    $query = "SELECT comments.id as comment_id, user.id as user_id , comments.* , user.* FROM `comments` left join user on comments.user_id = user.id;";
+
+    // Fetch comments related to the posts made by the current user
+    $query = "SELECT comments.id as comment_id, user.id as user_id, comments.*, user.*
+              FROM comments
+              LEFT JOIN post ON comments.post_id = post.id
+              LEFT JOIN user ON comments.user_id = user.id
+              WHERE post.user_id = $user_id
+              ORDER BY comments.id DESC";
+
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
-        $comment = [];
+        $comments = [];
         while ($row = $result->fetch_assoc()) {
-            array_push($comment, ["comment_id" => $row["comment_id"], "user_id" => $row["user_id"], "created_at" => $row["created_at"], "post_id" => $row["post_id"], "name" => $row["name"], "img" => $row["img"], "txt" => $row["txt"]]);
+            array_push($comments, [
+                "comment_id" => $row["comment_id"],
+                "user_id" => $row["user_id"],
+                "created_at" => $row["created_at"],
+                "post_id" => $row["post_id"],
+                "name" => $row["name"],
+                "img" => $row["img"],
+                "txt" => $row["txt"]
+            ]);
         }
-        return $comment;
+        return $comments;
     } else {
         return [];
-        header('Location: ../sign_in.php');
     }
 }
 

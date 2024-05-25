@@ -1,12 +1,12 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['user_email'])) {
     header('Location:sign_in.php');
 }
 ?>
-<!DOCTYPE html>
-<html>
+
+    <!DOCTYPE html>
+    <html>
 <title>الصفحة الرئيسية</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,29 +20,9 @@ if (!isset($_SESSION['user_email'])) {
         font-family: "Open Sans", sans-serif
     }
 
-
-    .create-group-sm {
-        display: none;
-    }
-
-    .groups {
+    body {
+        overflow-x: hidden;
         overflow-y: auto;
-    }
-
-    @media only screen and (max-width: 900px ) {
-        .create-group-sm {
-            display: block;
-            margin: 10px 0 10px 0;
-        }
-
-        .create-group-md {
-            display: none;
-        }
-
-        .search-group {
-            width: 100%;
-        }
-
     }
 
 </style>
@@ -50,141 +30,93 @@ if (!isset($_SESSION['user_email'])) {
 
 <?php include 'navbar.php' ?>
 
-<!-- Page Container -->
+<div class="w3-container w3-content">
+    <div class="group-image-container">
+        <img src="<?php echo getData("img"); ?>" style="height: 60vh" width="100%" alt="Group Image"
+             class="group-image ">
+    </div>
 
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+    <div class="group-info-container w3-container row mt-2" dir="rtl">
+        <div class=" col-md-6 text-right">
+            <h2 class="group-name ">
+                <?php echo getData("name"); ?>
+            </h2>
+        </div>
+        <div class="col-md-6 text-left mt-4">
+            <?php
+            if (status() == 'pending') {
+                echo '<button class="btn btn-secondary reject-btn" data-group-id="' . $_GET['id'] . '" data-user-id="' . $_SESSION['user_id'] . '">إالغاء الطلب </button>';
+            }
+            elseif (!status())
+            {
+                echo '<button class="btn btn-primary join-btn" data-group-id="' . $_GET['id'] . '" data-user-id="' . $_SESSION['user_id'] . '">طلب الانضمام</button>';
+            }
+            ?>
 
-
-    <!-- The Grid -->
-    <div class="w3-row">
-        <!-- Left Column -->
-        <div class="w3-col m3 pull-right">
-            <!-- Profile -->
-            <div class="w3-card w3-round w3-white">
-                <div class="w3-container">
-                    <a style="color: black" href="user_profile.php?user_id=<?php echo getdata("id"); ?>">
-                        <!-- Modify this line -->
-                        <h4 class="w3-center"><?php echo getdata("name"); ?></h4>
-                        <p class="w3-center"><img src="<?php echo getdata("img"); ?>" class="w3-circle"
-                                                  style="height:106px;width:106px" alt="Avatar"></p>
-                    </a>
-                    <hr>
-                    <p dir="rtl"><i
-                                class="fa fa-institution fa-fw w3-margin-right w3-text-theme"></i><?php echo getdata("university"); ?>
-                    </p>
-                    <p dir="rtl"><i
-                                class="fa fa-graduation-cap fa-fw w3-margin-right w3-text-theme"></i><?php echo getdata("major"); ?>
-                    </p>
-                    <p dir="rtl"><i
-                                class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> <?php echo getdata("age"); ?>
-                    </p>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="w3-card w3-round w3-white">
-                <div class="w3-container">
-                    <span><h3 class="text-center">المجموعات</h3></span>
-                    <div class="row">
-                        <div class="col-12 col-md-2 text-center create-group-md">
-                            <span>
-                    <button class="btn btn-success add-group" id="createGroupBtn" data-toggle="modal"
-                            data-target="#group-modal">+</button>
-                            </span>
-                        </div>
-                        <div class="col-12 col-md-10 search-group">
-                <span class="search-form d-flex align-items-center justify-content-end" style="margin-right: 5px">
-                    <input type="text" class="form-control" id="group-search-input">
-                    <button class="search-btn"><label for="group-search-input" class="fa fa-search"></label></button>
-                </span>
-                        </div>
-
-                    </div>
-                    <div class="col-12  text-center create-group-sm">
-                <span class="col-12  mx-4">
-                    <button class="btn btn-success col-md-10 col-12 add-group" data-toggle="modal"
-                            data-target="#group-modal">إنشاء مجموعة</button>
-                </span>
-                    </div>
-                </div>
-                <div class="groups" style="height: 45vh" dir="rtl" >
-
-                </div>
-
-
-            </div>
-
-
-            <br>
-
-
-            <div class="modal" id="group-modal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header ">
-                            <!--                <h4 class="modal-title">انشاء مجموعة</h4>-->
-                            <button type="button" class="close pull-left" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <div class="modal-body">
-                            <form method="post" action="database/addNewGroup.php">
-                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>"">
-                                <div class="form-group" dir="rtl">
-                                    <label for="group_name">اسم المجموعة</label>
-                                    <input type="text" class="form-control" id="group_name" name="group_name" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary" id="create-group-btn">انشاء</button>
-                            </form>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- End Left Column -->
         </div>
 
-        <!-- Middle Column -->
-        <div class="w3-col m7 pull-right">
+    </div>
+    <hr style="opacity: 1 ; border-color: #6c757d;">
 
-            <form name="postForm" action="database/addpost.php" method="post" accept-charset="utf-8">
-                <div class="w3-row-padding">
-                    <div class="w3-col m12">
-                        <div class="w3-card w3-round w3-white">
-                            <div class="w3-container w3-padding">
-                                <h6 class="w3-opacity" style="text-align: right">
-                                    اعلان جديد ...
-                                </h6>
-                                <textarea contenteditable="true" class="form-control w3-border w3-padding" rows="5"
-                                          style="text-align: right" id="post_txt" name="post_txt"
-                                          required></textarea><br>
-                                <p class="text-right pull-right" style="color: green;font-size: 20px;">
-                                    <?php
-                                    if (isset($_SESSION['post_added'])) {
-                                        echo $_SESSION['post_added'];
+    <?php if (status() =='admin' || status() == 'member') : ?>
 
-                                        unset($_SESSION['post_added']);
 
-                                    }
-                                    ?>
-                                </p>
-                                <button type="submit" id="btn" class="w3-button w3-theme"><i
-                                            class="fa fa-pencil"></i>
-                                     نشر
-                                </button>
-                                <div id="temp"></div>
+        <div class="w3-col m12 pull-right mt-4">
+            <div class="row" dir="rtl">
+                <div class="col-md-8 col-12 mt-2 order-2">
+                    <form name="postForm" action="database/groups_addPost.php" method="post" accept-charset="utf-8">
+                        <div class="w3-row-padding">
+                            <div class="w3-col m12">
+                                <div class="w3-card w3-round w3-white">
+                                    <div class="w3-container w3-padding">
+                                        <h6 class="w3-opacity" style="text-align: right">
+                                            اعلان جديد ...
+                                        </h6>
+                                        <textarea contenteditable="true" class="form-control w3-border w3-padding"
+                                                  rows="5"
+                                                  style="text-align: right" id="post_txt" name="post_txt"
+                                                  required></textarea><br>
+                                        <input type="hidden" name="group_id" value="<?php echo $_GET['id']; ?>">
+                                        <p class="text-right pull-right" style="color: green;font-size: 20px;">
+                                            <?php
+                                            if (isset($_SESSION['post_added'])) {
+                                                echo $_SESSION['post_added'];
+
+                                                unset($_SESSION['post_added']);
+
+                                            }
+                                            ?>
+                                        </p>
+                                        <button type="submit" id="btn" class="w3-button w3-theme"><i
+                                                    class="fa fa-pencil"></i>
+                                             نشر
+                                        </button>
+                                        <div id="temp"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
 
-            <!-- Start Model -->
+                <?php
+                if (status() =='admin') {
+                    echo '<div class="col-md-4 col-12 mt-2 order-1 order-md-2 ">
+                <div class="card">
+                    <div class="card-header text-right">
+                        طلبات الانضمام
+                    </div>
+                    <div class="card-body" style="height: 190px; overflow-y: auto">';
+                    getRequests();
+                    echo '</div>
+                </div>
+            </div>';
+                }
+                ?>
 
+            </div>
+
+            <!--        modal for comments-->
             <div id="myModal_comment" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
@@ -221,7 +153,7 @@ if (!isset($_SESSION['user_email'])) {
                 </div>
             </div>
 
-            <!-- End Model -->
+            <!--         End Model-->
 
             <?php
             $post = getposts();
@@ -235,24 +167,19 @@ if (!isset($_SESSION['user_email'])) {
                     echo '<span class="glyphicon glyphicon-remove delete-post pull-left" data-id="' . $item['post_id'] . '">&nbsp;</span>';
                 }
                 echo '<span class="w3-left w3-opacity">' . $item["created_at"] . '</span>';
-                echo '<br>';
-                echo '<br>';
-                if (!empty($item["group_name"])) {
-                    echo '<p style="color: grey; text-align: right">' . $item["group_name"] . '</p>';
-                }
-                echo '<br> ';
+                echo '<br> <br> <br>';
                 echo '<p  dir="rtl">' . $item["txt"] . '</p>';
 
 
                 echo '<div class="w3-row-padding">';
-                echo '<div class=" col-12 col-md-9 pull-right">';
+                echo '<div class="col-12 col-md-9 pull-right">';
                 echo '<div class="w3-card w3-round w3-white">';
                 echo '<div class="w3-container w3-padding">';
                 echo ' <textarea placeholder="أكتب تعليقاً..." contenteditable="true" class="form-control w3-border w3-padding comment-text" rows="1" style="text-align: right" name="comment_text" required></textarea>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
-                echo '<div class=" col-12 col-md-3 pull-left">';
+                echo '<div class="col-12 col-md-3 pull-right">';
                 echo '<button style="margin-top: 7px;" type="button" class="w3-button w3-theme-d2 w3-margin-bottom comment" ><i class="fa fa-comment"></i>  تعليق</button>';
                 echo '</div>';
                 echo '</div>';
@@ -288,92 +215,88 @@ if (!isset($_SESSION['user_email'])) {
 
             <!-- End Middle Column -->
         </div>
+    <?php endif; ?>
 
-
-        <!-- End Grid -->
-    </div>
-
-    <!-- End Page Container -->
 </div>
-<br>
-
-<!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-    <h5 style="text-align: center">Footer</h5>
-</footer>
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function () {
 
-        function getGroups() {
+        $(document).on("click", ".join-btn", function () {
+            let groupID = $(this).data("group-id");
             $.ajax({
-                url: "database/get_groups.php",
-                type: 'GET',
-                success: function (response) {
-                    $('.groups').empty();
-                    $('.groups').append(response);
+                url: "database/request_join_groups.php",
+                method: "POST",
+                data: {groupID: groupID , btn : 'join'},
+                success: function (data) {
+                    $(this).text("تم ارسال الطلب");
+                    $(this).attr("disabled", true);
+                }.bind(this),
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        });
+
+        $(document).on("click", ".reject-btn", function () {
+            let groupID = $(this).data("group-id");
+            $.ajax({
+                url: "database/request_join_groups.php",
+                method: "POST",
+                data: {groupID: groupID , btn : 'reject'},
+                success: function (data) {
+                    $(this).text("تم الغاء الطلب");
+                    $(this).attr("disabled", true);
+                }.bind(this),
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        });
+
+
+
+
+        $('.accept-btn').on('click', function () {
+            let Btn = $(this);
+            let userID = Btn.data("user-id");
+            $.ajax({
+                url: "database/request_join_groups.php",
+                type: "post",
+                data: {userID: userID, btn: "accept", groupID: <?php echo $_GET['id'] ?>},
+                success: function (data) {
+                    console.log(data);
+                    Btn.text('تم القبول');
+                    Btn.attr('disabled', true);
+                    Btn.siblings('.reject-btn').hide();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
                 }
             });
-        }
-
-        getGroups();
-
-        $('#group-search-input').on('input', function () {
-            var nameOfGroup = $(this).val();
-            if (nameOfGroup !== '') {
-                $.ajax({
-                    url: "database/search-groups.php",
-                    type: 'GET',
-                    data: {nameOfGroup: nameOfGroup},
-                    success: function (response) {
-                        $('.groups').empty();
-                        $('.groups').append(response);
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus, errorThrown);
-                    }
-                });
-            } else {
-                getGroups();
-            }
         });
 
+        $('.reject-btn').on('click', function () {
+            let Btn = $(this);
+            let userID = Btn.data("user-id");
+            $.ajax({
+                url: "database/request_join_groups.php",
+                type: "post",
+                data: {userID: userID, btn: "remove", groupID: <?php echo $_GET['id'] ?>},
+                success: function (data) {
+                    console.log(data);
+                    Btn.text('تم الرفض');
+                    Btn.attr('disabled', true);
+                    Btn.siblings('.accept-btn').hide();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        })
 
-        var to_msg = "";
-
-        // Accordion
-        function myFunction(id) {
-            var x = document.getElementById(id);
-            if (x.className.indexOf("w3-show") == -1) {
-                x.className += " w3-show";
-                x.previousElementSibling.className += " w3-theme-d1";
-            } else {
-                x.className = x.className.replace("w3-show", "");
-                x.previousElementSibling.className =
-                    x.previousElementSibling.className.replace(" w3-theme-d1", "");
-            }
-        }
-
-        // Used to toggle the menu on smaller screens when clicking on the menu button
-        function openNav() {
-            var x = document.getElementById("navDemo");
-            if (x.className.indexOf("w3-show") == -1) {
-                x.className += " w3-show";
-            } else {
-                x.className = x.className.replace(" w3-show", "");
-            }
-        }
-
-        $('.msg').on("click", function () {
-            to_msg = $(this).attr('data-ownerId');
-            //alert(to_msg)
-        });
 
         $('.comment').on("click", function (event) {
             var btn = event.target;
@@ -400,13 +323,11 @@ if (!isset($_SESSION['user_email'])) {
                                 '                <div class="col-sm-12">\n' +
                                 '                    <div class="panel panel-default">\n' +
                                 '                        <div class="panel-heading text-right">\n' +
-                                '                            <span class="glyphicon glyphicon-remove delete-comment pull-left" data-id="">&nbsp;</span>\n' +
-                                '                            <span class="glyphicon glyphicon-edit edit-comment pull-left" data-id="" data-content=""> &nbsp;</span>\n' +
+                                '                            <span class="glyphicon glyphicon-remove delete-comment pull-left" data-id="' + data.comment_id + '">&nbsp;</span>\n' +
+                                '                            <span class="glyphicon glyphicon-edit edit-comment pull-left" data-id="' + data.comment_id + '" data-content="' + text_content.value + '" data-toggle="modal" data-target="#myModal_comment"> &nbsp;</span>\n' +
                                 '                            <span class="text-muted pull-left">Now</span>\n' +
-                                '\n' +
-                                '                            <strong>' + data.user_name + ' </strong>\n' +
-                                '                            <img src="' + data.user_img + '" width="25" height="25" style="border-radius: 50%;">\n' +
-                                '\n' +
+                                '                            <a href="user_profile.php?user_id=' + data.user_id + '"><strong>' + data.user_name + ' </strong>' +
+                                '                            <img src="' + data.user_img + '" width="25" height="25" style="border-radius: 50%;"></a>\n' +
                                 '                        </div>\n' +
                                 '                        <div class="panel-body text-right">\n' +
                                 '                            ' + text_content.value + '\n' +
@@ -538,13 +459,11 @@ if (!isset($_SESSION['user_email'])) {
 </script>
 
 <?php getposts() ?>
-</body>
-</html>
 
+</body>
 <?php
 
-
-function getdata($input)
+function status()
 {
     $servername = "localhost";
     $username = "university_service";
@@ -558,33 +477,110 @@ function getdata($input)
         die("Connection failed: " . mysqli_connect_error());
     }
     mysqli_set_charset($conn, "utf8");
-    $query = "select * from  `user` where email = '" . $_SESSION['user_email'] . "'";
-    $result = $conn->query($query);
 
+    $query = "select `status` from `user_groups` where `user_id` = '" . $_SESSION['user_id'] . "' and `group_id` = '" . $_GET['id'] . "' ";
+    $result = $conn->query($query);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $user_id = $row["id"];
-        $user_img = $row["img"];
-        $user_age = $row["age"];
-        $user_name = $row["name"];
-        $major = $row["major"];
-        $university = $row["university"];
-        if ($input == "age")
-            return $user_age;
-        if ($input == "img")
-            return $user_img;
-        if ($input == "name")
-            return $user_name;
-        if ($input == "id")
-            return $user_id;
-        if ($input == "major")
-            return $major;
-        if ($input == "university")
-            return $university;
+        return $row['status'];
     } else {
-        header('Location: ../sign_in.php');
+        return false;
     }
-    return "";
+}
+
+function isMember()
+{
+    $servername = "localhost";
+    $username = "university_service";
+    $password = "";
+
+// Create connection
+//$conn = mysqli_connect($servername, $username, $password);
+    $conn = mysqli_connect($servername, "root", $password, $username, "3306");
+// Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    mysqli_set_charset($conn, "utf8");
+
+    $query = "select * from `user_groups` where `user_id` = '" . $_SESSION['user_id'] . "' and `group_id` = '" . $_GET['id'] . "' and `status` = 'member'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getRequests()
+{
+
+    $servername = "localhost";
+    $username = "university_service";
+    $password = "";
+
+// Create connection
+//$conn = mysqli_connect($servername, $username, $password);
+    $conn = mysqli_connect($servername, "root", $password, $username, "3306");
+// Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    mysqli_set_charset($conn, "utf8");
+    $query = "select `user`.* from `user` inner join `user_groups` on `user`.`id` = `user_groups`.`user_id` where `user_groups`.`group_id` = '" . $_GET['id'] . "'" . " and `user_groups`.`status` = 'pending'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="group row align-items-center mt-4 mx-3" dir="rtl">';
+            echo '<div class="col-3">';
+            echo '<a href="user_profile.php?user_id=' . $row["id"] . '">';
+            echo '<img class="rounded-circle" src="' . $row["img"] . '" alt="' . $row["name"] . '" style="width: 100% ;">';
+            echo '</a>';
+            echo '</div>';
+            echo '<div class="col-3">';
+            echo '<a href="user_profile.php?user_id=' . $row["id"] . '">';
+            echo '<p>' . $row["name"] . '</p>';
+            echo '</a>';
+            echo '</div>';
+            echo '<div class="col-3 d-flex justify-content-around">';
+            echo '<button class="btn btn-success mx-2 accept-btn " data-user-id="' . $row["id"] . '">قبول</button>';
+            echo '<button class="btn btn-danger reject-btn " data-user-id="' . $row["id"] . '">رفض</button>';
+            echo '</div>';
+            echo '</div>';
+
+        }
+
+    }
+}
+
+function getData($input)
+{
+
+    $servername = "localhost";
+    $username = "university_service";
+    $password = "";
+
+// Create connection
+//$conn = mysqli_connect($servername, $username, $password);
+    $conn = mysqli_connect($servername, "root", $password, $username, "3306");
+// Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    mysqli_set_charset($conn, "utf8");
+
+    $query = "select * from `groups` where id = '" . $_GET['id'] . "'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $group_name = $row["name"];
+        $group_img = $row["img"];
+        if ($input == "name")
+            return $group_name;
+        if ($input == "img")
+            return $group_img;
+    }
+
 }
 
 function getposts()
@@ -593,26 +589,17 @@ function getposts()
     $username = "university_service";
     $password = "";
 
-    // Get the user's ID
-    $user_id = getdata("id");
-
-    // Create connection
     $conn = mysqli_connect($servername, "root", $password, $username, "3306");
-    // Check connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
     mysqli_set_charset($conn, "utf8");
 
-    // Fetch posts from the user and their friends
-    $query = "SELECT post.id as post_id, post.txt, post.created_at, user.id as user_id, user.name, user.img , groups.name as group_name
+    $group_id = $_GET['id'];
+    $query = "SELECT post.id as post_id, post.txt, post.created_at, user.id as user_id, user.name, user.img 
               FROM post 
               INNER JOIN user ON post.user_id = user.id 
-              LEFT JOIN friendships ON (friendships.user1_id = post.user_id AND friendships.user2_id = $user_id AND friendships.status = 'accepted') 
-                                      OR (friendships.user2_id = post.user_id AND friendships.user1_id = $user_id AND friendships.status = 'accepted')
-             LEFT JOIN user_groups ON user_groups.user_id = $user_id AND user_groups.group_id = post.group_id AND user_groups.status IN ('admin', 'member')
-              LEFT JOIN groups ON groups.id = post.group_id
-              WHERE post.user_id = $user_id OR friendships.user1_id = $user_id OR friendships.user2_id = $user_id OR user_groups.user_id = $user_id
+              WHERE post.group_id = $group_id
               ORDER BY post.id DESC";
 
     $result = $conn->query($query);
@@ -626,8 +613,7 @@ function getposts()
                 "created_at" => $row["created_at"],
                 "user_id" => $row["user_id"],
                 "name" => $row["name"],
-                "img" => $row["img"],
-                "group_name" =>$row["group_name"]
+                "img" => $row["img"]
             ]);
         }
         return $posts;
@@ -666,6 +652,4 @@ function getComments()
     }
 }
 
-
 ?>
-

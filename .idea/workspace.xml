@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e54a571c-6adf-48f4-85c4-4ef389a0c5d0" name="Default Changelist" comment="">
+    <list default="true" id="e54a571c-6adf-48f4-85c4-4ef389a0c5d0" name="Default Changelist" comment="add friends files">
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user_profile.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/stylesheets/messages.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/stylesheets/messages.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/AddNewMsg.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/AddNewMsg.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/addComment.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/addComment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/addpost.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/addpost.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/connectionDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/connectionDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/deleteComment.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/deleteComment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/deletepost.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/deletepost.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/editComment.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/editComment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/edit_person_info.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/edit_person_info.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/getMSGS.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/getMSGS.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/sendMSG.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/sendMSG.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/university_service.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/university_service.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/messages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/personalinfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/personalinfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sign_in.php" beforeDir="false" afterPath="$PROJECT_DIR$/sign_in.php" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -23,111 +48,6 @@
     </option>
     <expand />
     <select />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-647320629">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.23" value="1" />
-          <entry key="project.open.time.48" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="html" value="3" />
-          <entry key="md" value="1" />
-          <entry key="php" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="HTML" value="3" />
-          <entry key="Markdown" value="1" />
-          <entry key="PHP" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="html" value="596" />
-          <entry key="php" value="114" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="HTML" value="596" />
-          <entry key="PHP" value="114" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="-453655543">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="44" />
-          <entry key="project.open.time.1" value="2" />
-          <entry key="project.open.time.11" value="5" />
-          <entry key="project.open.time.12" value="3" />
-          <entry key="project.open.time.13" value="5" />
-          <entry key="project.open.time.14" value="1" />
-          <entry key="project.open.time.15" value="2" />
-          <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.20" value="2" />
-          <entry key="project.open.time.21" value="1" />
-          <entry key="project.open.time.23" value="2" />
-          <entry key="project.open.time.24" value="2" />
-          <entry key="project.open.time.25" value="1" />
-          <entry key="project.open.time.26" value="4" />
-          <entry key="project.open.time.28" value="1" />
-          <entry key="project.open.time.29" value="1" />
-          <entry key="project.open.time.31" value="2" />
-          <entry key="project.open.time.34" value="2" />
-          <entry key="project.open.time.35" value="1" />
-          <entry key="project.open.time.37" value="1" />
-          <entry key="project.open.time.41" value="1" />
-          <entry key="project.open.time.43" value="2" />
-          <entry key="project.open.time.46" value="1" />
-          <entry key="project.open.time.51" value="1" />
-          <entry key="project.open.time.62" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="46" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="css" value="8" />
-          <entry key="html" value="216" />
-          <entry key="php" value="5810" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="CSS" value="8" />
-          <entry key="HTML" value="216" />
-          <entry key="PHP" value="5810" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="css" value="4" />
-          <entry key="html" value="3" />
-          <entry key="jpg" value="2" />
-          <entry key="js" value="1" />
-          <entry key="php" value="82" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CSS" value="4" />
-          <entry key="HTML" value="3" />
-          <entry key="Image" value="2" />
-          <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="82" />
-        </counts>
-      </usages-collector>
-    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -184,6 +104,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="nour" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -222,6 +147,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
       <path value="$PROJECT_DIR$/assets/vendor/jquery-datatables/package.json" />
@@ -230,12 +158,16 @@
     </packageJsonPaths>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1" />
     <option name="y" value="1" />
     <option name="width" value="1364" />
     <option name="height" value="726" />
   </component>
+  <component name="ProjectId" id="2e9TxZS0DiyYXWBZR61A0fMthjr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -261,34 +193,40 @@
       </pane>
     </panes>
   </component>
-  <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/xampp/htdocs/UNIVERSITY_SERVICES/assets/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\UNIVERSITY_SERVICES\database" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\UNIVERSITY_SERVICES\assets\images" />
       <recent name="C:\Users\ahmad\PhpstormProjects\UNIVERSITY_SERVICES" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\UNIVERSITY_SERVICES\img" />
+      <recent name="C:\xampp\htdocs\UNIVERSITY_SERVICES\database" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="UNIVERSITY_SERVICES" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
@@ -298,9 +236,18 @@
     <recent_temporary>
       <list>
         <item itemvalue="PHPUnit.UNIVERSITY_SERVICES" />
+        <item itemvalue="PHPUnit.UNIVERSITY_SERVICES" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-php-predefined-ba97393d7c68-6f8e3395a2b4-com.jetbrains.php.sharedIndexes-PS-233.15026.12" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -361,6 +308,47 @@
       <workItem from="1552845001099" duration="301000" />
       <workItem from="1552847901170" duration="601000" />
       <workItem from="1553547340046" duration="100000" />
+      <workItem from="1711316043254" duration="1327000" />
+      <workItem from="1711545324566" duration="2489000" />
+      <workItem from="1711634642076" duration="3676000" />
+      <workItem from="1711890998142" duration="8411000" />
+      <workItem from="1712011852059" duration="11018000" />
+      <workItem from="1712052113655" duration="5561000" />
+      <workItem from="1712279250516" duration="1000" />
+      <workItem from="1712327571660" duration="647000" />
+      <workItem from="1712414566569" duration="18032000" />
+      <workItem from="1712497145900" duration="477000" />
+      <workItem from="1712498243225" duration="7084000" />
+      <workItem from="1713195143021" duration="3190000" />
+      <workItem from="1713377636684" duration="2000" />
+      <workItem from="1713740696614" duration="1183000" />
+      <workItem from="1714060132569" duration="13082000" />
+      <workItem from="1714212327592" duration="677000" />
+      <workItem from="1714396455448" duration="26133000" />
+      <workItem from="1714475881975" duration="4715000" />
+      <workItem from="1714480700595" duration="10289000" />
+      <workItem from="1714491865347" duration="10618000" />
+      <workItem from="1714564602007" duration="597000" />
+      <workItem from="1714656693696" duration="3648000" />
+      <workItem from="1714747858559" duration="12562000" />
+      <workItem from="1714828622409" duration="1083000" />
+      <workItem from="1714830272171" duration="151000" />
+      <workItem from="1714830433885" duration="77000" />
+      <workItem from="1714830521415" duration="5684000" />
+      <workItem from="1714836464743" duration="23206000" />
+      <workItem from="1714862730958" duration="6303000" />
+      <workItem from="1714922369959" duration="21162000" />
+      <workItem from="1714998302652" duration="6989000" />
+      <workItem from="1715010772270" duration="604000" />
+      <workItem from="1715170614872" duration="1000" />
+      <workItem from="1715185153645" duration="1634000" />
+      <workItem from="1715187576488" duration="1285000" />
+      <workItem from="1715247365421" duration="9472000" />
+      <workItem from="1715326551367" duration="4153000" />
+      <workItem from="1715330964960" duration="567000" />
+      <workItem from="1715352718027" duration="1000" />
+      <workItem from="1716652147511" duration="115000" />
+      <workItem from="1716661083591" duration="892000" />
     </task>
     <servers />
   </component>
@@ -394,10 +382,18 @@
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/vendor/flot/API.md" />

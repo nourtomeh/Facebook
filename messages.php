@@ -11,7 +11,6 @@ if (!isset($_SESSION['user_email'])) {
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,36 +23,43 @@ if (!isset($_SESSION['user_email'])) {
     <link href="assets/stylesheets/messages.css" type="text/css" rel="stylesheet">
 
 </head>
+<style>
+    html, body, h1, h2, h3, h4, h5 {
+        font-family: "Open Sans", sans-serif !important
+    }
+
+    .fa-times {
+        position: fixed;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .image {
+            max-width: 130%;
+            border-radius: 50%
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .image {
+            max-width: 100%;
+            border-radius: 50%
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .msgimg {
+            max-width: 130%;
+            border-radius: 50%
+        }
+    }
+</style>
 <body class="w3-theme-l5">
-<!-- Navbar -->
-<div class="w3-top">
-    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
-           href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-        <a href="home.php" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i
-                    class="fa fa-home w3-margin-right"></i>Logo</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i
-                    class="fa fa-globe"></i></a>
-        <a href="personalinfo.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-           title="Account Settings"><i class="fa fa-user"></i></a>
-        <a href="messages.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-           title="Messages"><i class="fa fa-envelope"></i>
-            <sub style="color: red">5</sub>
-        </a>
 
+<?php include 'navbar.php' ?>
 
-        <a onclick="document.location.href = 'helper/kill_session.php';"
-           class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
-            Logout <img src="assets/uploaded/pesonal_profile.png" class="w3-circle" style="height:23px;width:23px"
-                        alt="Avatar">
-        </a>
-    </div>
-</div>
 <br>
 <br>
 <br>
 <br>
-<div class="container pull-right">
+<div class="container-fluid">
 
     <div class="messaging">
         <div class="inbox_msg">
@@ -62,41 +68,38 @@ if (!isset($_SESSION['user_email'])) {
                 <div class="msg_history">
 
                 </div>
-                <div class="type_msg">
+                <div class="type_msg w3-hide">
                     <div class="input_msg_write" dir="rtl">
                         <button id="AddNewMsg" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
-                                                                      aria-hidden="true"></i></button>
+                                                                                     aria-hidden="true"></i></button>
                         <input type="text" id="msgtxt" class="write_msg text-right" placeholder="اكتب الرسالة هنا"/>
                     </div>
                 </div>
             </div>
-            <div class="inbox_people">
+            <div class="inbox_people float-end ">
                 <div class="headind_srch">
-                    <div >
+                    <div>
                         <h4 class="text-right pull-right">اخر الرسائل</h4>
                     </div>
                 </div>
 
-                <div class="inbox_chat">
-                <?php
-                $msgs  = getListMSG();
+                <div class="inbox_chat" style="cursor: pointer">
+                    <?php
+                    $friends = getListMSG();
 
-                foreach ($msgs as $item) {
+                    foreach ($friends as $item) {
 
-                    echo '<div class="chat_list active_chat" data-msgid = "'. $item['msg_id'] .'" data-toid="'. $item['user_id'] .'"><i></i>';
-                    echo '<div class="chat_people">';
-                    echo '<div class="chat_ib text-right">';
-                    echo '<span class="chat_date pull-left">'. $item["created_at"] .'</span>';
-                    echo '<h5>'. $item["name"] .'</h5>';
-                    echo '<p>'. $item["txt"] .'</p>';
-                    echo '</div>';
-                    echo '<div class="chat_img"><img src="'. $item["img"] .'" alt="sunil"></div>';
-                    echo ' </div>';
-                    echo ' </div>';
+                        echo '<div class="chat_list active_chat col-12 " data-toid="' . $item['user_id'] . '">';
+                        echo '<div class="chat_people ">';
+                        echo '<div class="chat_ib text-right col-md-6 col-12 d-md-block d-none mt-2 ">';
+                        echo '<h5>' . $item["name"] . '</h5>';
+                        echo '</div>';
+                        echo '<div class="chat_img col-md-5 col-12  "><img class="image" src="' . $item["img"] . '" alt="sunil"></div>';
+                        echo ' </div>';
+                        echo ' </div>';
+                    }
 
-                }
-
-                ?>
+                    ?>
                 </div>
 
             </div>
@@ -110,45 +113,60 @@ if (!isset($_SESSION['user_email'])) {
 
 <script>
     $(document).ready(function () {
-        var to_id = 0 ;
-        $(".chat_list.active_chat").on("click",function () {
-             to_id = $(this).attr('data-toid');
+
+        function scrollToBottom() {
+            $(".msg_history").animate({scrollTop: $(".msg_history")[0].scrollHeight}, "100");
+        }
+
+        $(document).on("click", ".fa-times", function () {
+            $(".msg_history").empty();
+            $(".type_msg").addClass("w3-hide");
+
+
+        });
+
+        var to_id = 0;
+        $(".chat_list.active_chat").on("click", function () {
+            to_id = $(this).attr('data-toid');
+            $(".msg_history").empty();
+            $(".type_msg").removeClass("w3-hide");
+            $(".msg_history").append(' <span class="fa fa-times "></span>')
 
             $.ajax({
                 url: "database/getMSGS.php",
                 type: "get",
-                data: {"to_id":to_id} ,
+                data: {"to_id": to_id},
                 success: function (data) {
                     data = JSON.parse(data)
                     console.log(data)
 
-                    $(".msg_history").empty();
+                    $(".msg_history").append(' <span class="fa fa-times "></span>')
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].to_id === to_id) {
 
-                    for(var i=0;i<data.length;i++){
-                        if(data[i].to_id === to_id){
-
-                            $(".msg_history").append('<h1><div class="outgoing_msg">\n' +
+                            $(".msg_history").append('<h1><div class="outgoing_msg ">\n' +
                                 '                        <div class="sent_msg">\n' +
-                                '                            <p class="text-right">'+ data[i].txt +'</p>\n' +
-                                '                            <span class="time_date">'+ data[i].created_at +'</span></div>\n' +
+                                '                            <p class="text-right">' + data[i].txt + '</p>\n' +
+                                '                            <span class="time_date">' + data[i].created_at + '</span></div>\n' +
                                 '                    </div></h1>')
 
-                        }else{
-                            $(".msg_history").append('    <div class="incoming_msg">\n' +
-                                '                        <div class="incoming_msg_img"><img src="'+ data[i].img +'"\n' +
+                        } else {
+                            $(".msg_history").append('    <div class="incoming_msg" style="margin: 20px">\n' +
+                                '                        <div class="incoming_msg_img"><img class="image msgimg" src="' + data[i].img + '"\n' +
                                 '                                                           alt="sunil"></div>\n' +
                                 '                        <div class="received_msg">\n' +
                                 '                            <div class="received_withd_msg">\n' +
-                                '                                <p class="text-right">'+ data[i].txt +'</p>\n' +
-                                '                                <span class="time_date">'+ data[i].created_at +'</span></div>\n' +
+                                '                                <p class="text-right">' + data[i].txt + '</p>\n' +
+                                '                                <span class="time_date">' + data[i].created_at + '</span></div>\n' +
                                 '                        </div>\n' +
                                 '                    </div>')
                         }
 
                     }
+                    scrollToBottom();
 
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
                 }
 
@@ -156,22 +174,24 @@ if (!isset($_SESSION['user_email'])) {
             });
         })
 
-        $("#AddNewMsg").on("click",function () {
+
+        $("#AddNewMsg").on("click", function () {
             var txt = $("#msgtxt").val();
-            if(txt){
+            if (txt) {
                 $.ajax({
                     url: "database/AddNewMsg.php",
                     type: "get",
-                    data: {"to_id":to_id,"txt":txt} ,
+                    data: {"to_id": to_id, "txt": txt},
                     success: function (data) {
                         $(".msg_history").append('<h1><div class="outgoing_msg">\n' +
                             '                        <div class="sent_msg">\n' +
-                            '                            <p class="text-right">'+ txt +'</p>\n' +
+                            '                            <p class="text-right">' + txt + '</p>\n' +
                             '                            <span class="time_date"> now </span></div>\n' +
                             '                    </div></h1>')
                         $("#msgtxt").val("")
+                        scrollToBottom();
                     },
-                    error: function(jqXHR, textStatus, errorThrown) {
+                    error: function (jqXHR, textStatus, errorThrown) {
                         console.log(textStatus, errorThrown);
                     }
 
@@ -182,47 +202,55 @@ if (!isset($_SESSION['user_email'])) {
     })
 </script>
 
-    <?php
-    function getListMSG()
-    {
-        $servername = "localhost";
-        $username = "university_service";
-        $password = "root";
+<?php
+function getListMSG()
+{
+    $servername = "localhost";
+    $username = "university_service";
+    $password = "";
 
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);
-        $conn = mysqli_connect($servername, "root", $password, $username, "3306");
+    $conn = mysqli_connect($servername, "root", $password, $username, "3306");
 // Check connection
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-        mysqli_set_charset($conn, "utf8");
-        $queryid = "select * from  `user` where email = '" . $_SESSION['user_email'] . "'";
-        $resultid = $conn->query($queryid);
-        $user_id = "";
-        if ($resultid->num_rows > 0) {
-            $row = $resultid->fetch_assoc();
-            $user_id = $row["id"];
-        } else {
-            header('Location: ../sign_in.php');
-        }
-
-
-        $query = "select messages.id as msg_id,messages.created_at,messages.txt,user.* from messages inner join user on messages.to_id = user.id where messages.from_id = " . $user_id . " GROUP by messages.to_id ORDER BY created_at desc";
-
-        $result = $conn->query($query);
-
-        if ($result->num_rows > 0) {
-            $msgs = [];
-            while ($row = $result->fetch_assoc()) {
-                array_push($msgs, ["msg_id" => $row["msg_id"], "txt" => $row["txt"], "created_at" => $row["created_at"], "user_id" => $row["id"], "name" => $row["name"], "img" => $row["img"]]);
-            }
-            return $msgs;
-        } else {
-            return [];
-            header('Location: ../sign_in.php');
-        }
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
     }
+    mysqli_set_charset($conn, "utf8");
+    $queryid = "select * from  `user` where email = '" . $_SESSION['user_email'] . "'";
+    $resultid = $conn->query($queryid);
+    $user_id = "";
+    if ($resultid->num_rows > 0) {
+        $row = $resultid->fetch_assoc();
+        $user_id = $row["id"];
+    } else {
+        header('Location: ../sign_in.php');
+    }
+
+
+//        $query = "select messages.id as msg_id,messages.created_at,messages.txt,user.* from messages inner join user on messages.to_id = user.id  where messages.from_id = " . $user_id . "  GROUP by messages.to_id ORDER BY messages.created_at DESC";
+    $query = "SELECT user.id, user.name, user.email, user.img, MAX(messages.created_at) AS latest_message_time
+FROM user
+INNER JOIN friendships ON ((friendships.user1_id = user.id AND friendships.user2_id = $user_id) OR (friendships.user2_id = user.id AND friendships.user1_id = $user_id))
+LEFT JOIN messages ON ((messages.to_id = user.id AND messages.from_id = $user_id) OR (messages.from_id = user.id AND messages.to_id = $user_id))
+WHERE friendships.status = 'accepted'
+GROUP BY user.id, user.name, user.email, user.img
+ORDER BY latest_message_time DESC";
+
+
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+        $friends = [];
+        while ($row = $result->fetch_assoc()) {
+            array_push($friends, ["user_id" => $row["id"], "name" => $row["name"], "img" => $row["img"]]);
+        }
+        return $friends;
+    } else {
+        return [];
+        header('Location: ../sign_in.php');
+    }
+}
 
 ?>
 

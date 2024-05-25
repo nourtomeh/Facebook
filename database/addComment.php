@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 if (!isset($_SESSION['user_email'])) {
     header('Location:sign_in.php');
@@ -7,7 +6,7 @@ if (!isset($_SESSION['user_email'])) {
 
 $servername = "localhost";
 $username = "university_service";
-$password = "root";
+$password = "";
 
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);

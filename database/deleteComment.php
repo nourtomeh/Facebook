@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_email'])) {
 
 $servername = "localhost";
 $username = "university_service";
-$password = "root";
+$password = "";
 
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);
